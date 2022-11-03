@@ -1,4 +1,4 @@
-package ECommerce;
+package ECommerce.PageObjectModel;
 
 import java.time.Duration;
 import java.util.List;
@@ -23,9 +23,11 @@ public class StanAloneTest {
 	
 	public static void main(String[] args) throws InterruptedException {
 		String Productname = "ADIDAS ORIGINAL";
-		
-		WebDriverManager.chromedriver().setup();
+		String Productname1 = "ADIDAS ORIGINALss";
 		WebDriver driver = new ChromeDriver();
+		LoginPage loginPage = new LoginPage(driver);
+		WebDriverManager.chromedriver().setup();
+	
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		driver.manage().window().maximize();
 		driver.get("https://rahulshettyacademy.com/client/");
