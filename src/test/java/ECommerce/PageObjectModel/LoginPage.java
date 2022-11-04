@@ -6,9 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends AbstractComponent {
 
 	WebDriver driver;
+	
+	public LoginPage(WebDriver driver) {
+		super(driver);
+		this.driver=driver;
+		PageFactory.initElements(driver,this);
+	}
 	
 	//WebElement UserEmail = driver.findElement(By.id("userEmail"));
 	@FindBy(id="userEmail")
@@ -17,9 +23,17 @@ public class LoginPage {
 	@FindBy(id="userPassword")
 	WebElement UserPassword;
 	
+	@FindBy(id="login")
+	WebElement LoginBtn;
 	
-	public LoginPage(WebDriver driver) {
-		this.driver=driver;
-		PageFactory.initElements(driver,this);
+	public void GoTo() {
+		driver.get("https://rahulshettyacademy.com/client/");
 	}
+	public void Login(String Email,String Password) {
+		UserEmail.sendKeys(Email);
+		UserPassword.sendKeys(Password);
+		LoginBtn.click();
+		}
+	
+	
 }
