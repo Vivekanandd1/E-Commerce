@@ -23,6 +23,8 @@ public class LoginPage extends AbstractComponent {
 	@FindBy(id="userPassword")
 	WebElement UserPassword;
 	
+	
+	
 	@FindBy(id="login")
 	WebElement LoginBtn;
 	

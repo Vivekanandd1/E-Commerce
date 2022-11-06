@@ -20,13 +20,21 @@ public class CartPage extends AbstractComponent {
 	@FindBy(css=".cartSection h3")
 	List<WebElement> CartProducts;
 	
-	@FindBy(css=".totalRow button")
+	@FindBy(css=".btn.btn-custom[routerlink='/dashboard/cart']")
 	WebElement RowBtn;
+	
+	@FindBy(xpath = "//button[normalize-space()='Buy Now']")
+	WebElement BuyBtn;
 	
 	public Boolean VerifyProductDisplay(String Productname ) {
 		Boolean Match = CartProducts.stream().anyMatch(CartProduct->CartProduct.getText().equalsIgnoreCase(Productname));
-		Assert.assertTrue(Match);
+//		String vd  = CartProducts.stream().anyMatch(CartProduct->CartProduct.getText().equalsIgnoreCase(Productname)).
 		return Match;
-		
+			
+	}
+	
+	public void GoToCheckout() {
+		RowBtn.click();
+		BuyBtn.click();
 	}
 }

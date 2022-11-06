@@ -32,8 +32,13 @@ public class AbstractComponent {
 		CartBtn.click();
 	}
 	public void ElementToBeDisappear(WebElement Ele) throws InterruptedException {
-		Thread.sleep(1000);
+		Thread.sleep(500);
 //		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 //		wait.until(ExpectedConditions.invisibilityOf(Ele));
+	}
+	
+	public void ElementToClickable(By findBy) {
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.elementToBeClickable(findBy));
 	}
 }
