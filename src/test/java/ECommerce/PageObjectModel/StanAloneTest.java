@@ -31,9 +31,9 @@ public class StanAloneTest {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		driver.manage().window().maximize();
 		driver.get("https://rahulshettyacademy.com/client/");
-		driver.findElement(By.id("userEmail")).sendKeys("ec.vivekd92@gmail.com");
-		driver.findElement(By.id("userPassword")).sendKeys("Rony@11888");
-		driver.findElement(By.id("login")).click();
+//		driver.findElement(By.id("userEmail")).sendKeys("ec.vivekd92@gmail.com");
+//		driver.findElement(By.id("userPassword")).sendKeys("Rony@11888");
+//		driver.findElement(By.id("login")).click();
 		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 		List<WebElement> Productlists = driver.findElements(By.cssSelector(".mb-3"));
 		WebElement prod = Productlists.stream().filter(product->

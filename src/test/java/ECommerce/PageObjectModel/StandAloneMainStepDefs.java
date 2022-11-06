@@ -22,27 +22,26 @@ public class StandAloneMainStepDefs {
 		String Productname1 = "ADIDAS ORIGINALss";
 		WebDriver driver = new ChromeDriver();
 		LoginPage loginPage = new LoginPage(driver);
+		CartPage  cartPage = new CartPage(driver);
 		ProductCatalouge productCatalouge = new ProductCatalouge(driver);
 		WebDriverManager.chromedriver().setup();
 	
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		driver.manage().window().maximize();
 		
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+		
         loginPage.GoTo();
 		loginPage.Login("ec.vivekd92@gmail.com", "Rony@11888");
+		
+		
 		List<WebElement>Productlists = productCatalouge.GetProductList();
 		
-		WebElement prod = Productlists.stream().filter(product->
-		product.findElement(By.cssSelector("B")).getText().equals(Productname)).findFirst().orElse(null);
-		prod.findElement(By.cssSelector(".card-body button:last-of-type")).click();
+		productCatalouge.AddProductToCart(Productname);
+	     
+		cartPage.VerifyProductDisplay(Productname);
+		//here we stopped
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
-		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.cssSelector(".ng-animating"))));
-		driver.findElement(By.cssSelector("[routerlink*='cart']")).click();
-		List<WebElement> CartProducts = driver.findElements(By.cssSelector(".cartSection h3"));
-		Boolean Match = CartProducts.stream().anyMatch(CartProduct->CartProduct.getText().equalsIgnoreCase(Productname));
-		Assert.assertTrue(Match);
-		driver.findElement(By.cssSelector(".totalRow button")).click();
 	
 		Actions A = new Actions(driver);
 		A.sendKeys(driver.findElement(By.cssSelector("[placeholder='Select Country']")),"india").build().perform();

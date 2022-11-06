@@ -19,11 +19,31 @@ public class ProductCatalouge extends AbstractComponent {
     
  	@FindBy(css=".mb-3")
  	List<WebElement> Products;
+
+ 	@FindBy(css=".ng-animating")
+ 	WebElement Animation;
  	
  	By products = By.cssSelector(".mb-3");
+ 	By AddToCart = By.cssSelector(".card-body button:last-of-type");
+ 	By ToastMessage = By.cssSelector("#toast-container");
+ 
  	
  	public List<WebElement> GetProductList() {
  		ElementToBeAppear(products);
  		return Products;
+ 	}
+ 	
+ 	public WebElement GetProductByName(String Productname) {
+ 		
+ 		WebElement prod = GetProductList().stream().filter(product->
+		product.findElement(By.cssSelector("B")).getText().equals(Productname)).findFirst().orElse(null);
+ 		return prod;
+ 	}
+ 	
+ 	public void AddProductToCart(String Productname) throws InterruptedException {
+ 		WebElement prod = GetProductByName(Productname);
+ 		prod.findElement(AddToCart).click();
+ 		ElementToBeAppear(ToastMessage);
+ 		ElementToBeDisappear(Animation);
  	}
 }
