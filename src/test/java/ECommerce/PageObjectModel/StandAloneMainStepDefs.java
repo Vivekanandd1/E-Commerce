@@ -20,6 +20,7 @@ public class StandAloneMainStepDefs {
 	public static void main(String[] args) throws InterruptedException {
 		String Productname = "ADIDAS ORIGINAL";
 		String CountryName  = "india";
+		String ActualText = "THANKYOU FOR THE ORDER.";
 		WebDriver driver = new ChromeDriver();
 		LoginPage loginPage = new LoginPage(driver);
 		CartPage  cartPage = new CartPage(driver);
@@ -42,16 +43,17 @@ public class StandAloneMainStepDefs {
 		
 		Boolean Match = cartPage.VerifyProductDisplay(Productname);
 	
-		Assert.assertFalse(Match);
+//		Assert.assertTrue(Match);
 		
 		cartPage.GoToCheckout();
 		checkoutPage.selectCountry(CountryName);
 		checkoutPage.OrderSubmit();
-		
+		ConfirmationPage confirmationPage = new ConfirmationPage(driver);
 		
 	
-		String Confirmation = driver.findElement(By.xpath("//h1[normalize-space()='Thankyou for the order.']")).getText();
-		Assert.assertEquals("THANKYOU FOR THE ORDER.", Confirmation);
+		String Confirmation = confirmationPage.ConfirmationText();
+				
+		Assert.assertEquals(ActualText, Confirmation);
 			
 		
 		
