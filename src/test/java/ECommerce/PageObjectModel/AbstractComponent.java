@@ -28,8 +28,9 @@ public class AbstractComponent {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(findBy));
 	}
 	
-	public void GotoCartPage() {
+	public CartPage GotoCartPage() {
 		CartBtn.click();
+		return null;
 	}
 	public void ElementToBeDisappear(WebElement Ele) throws InterruptedException {
 		Thread.sleep(500);

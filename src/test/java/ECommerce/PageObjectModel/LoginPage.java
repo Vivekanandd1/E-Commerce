@@ -35,6 +35,7 @@ public class LoginPage extends AbstractComponent {
 		UserEmail.sendKeys(Email);
 		UserPassword.sendKeys(Password);
 		LoginBtn.click();
+		
 		}
 	
 	
