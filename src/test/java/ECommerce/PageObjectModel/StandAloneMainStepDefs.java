@@ -31,18 +31,18 @@ public class StandAloneMainStepDefs extends BaseTestComponent {
 		
 		LoginPage loginPage = Launch();
 //		LoginPage loginPage = new LoginPage(driver);
-		loginPage.Login("ec.vivekd92@gmail.com", "Rony@11888");
-		ProductCatalouge productCatalouge = new ProductCatalouge(driver);
+		ProductCatalouge productCatalouge = loginPage.Login("ec.vivekd92@gmail.com", "Rony@11888");
 	
-		
 		
 		List<WebElement>Productlists = productCatalouge.GetProductList();	
 		productCatalouge.AddProductToCart(Productname);
+//		productCatalouge.GotoCartPage();
 		CartPage  cartPage = productCatalouge.GotoCartPage();
 		Boolean Match = cartPage.VerifyProductDisplay(Productname);
 //		Assert.assertTrue(Match);
 		
 		CheckOutPage checkoutPage = cartPage.GoToCheckout();
+//		CheckOutPage checkoutPage = new CheckOutPage(driver);
 		checkoutPage.selectCountry(CountryName);
 		checkoutPage.OrderSubmit();
 		ConfirmationPage confirmationPage = new ConfirmationPage(driver);

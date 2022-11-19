@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,8 +31,15 @@ public class AbstractComponent {
 	}
 	
 	public CartPage GotoCartPage() {
-		CartBtn.click();
-		return null;
+		try {
+		CartBtn.click();}
+		catch (ElementClickInterceptedException e) {
+			WebElement element = driver.findElement(By.cssSelector("[routerlink*='cart']"));
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].click();", element);
+		}
+		CartPage  cartPage = new CartPage(driver);
+		return cartPage;
 	}
 	public void ElementToBeDisappear(WebElement Ele) throws InterruptedException {
 		Thread.sleep(500);

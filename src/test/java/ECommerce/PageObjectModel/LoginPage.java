@@ -31,10 +31,12 @@ public class LoginPage extends AbstractComponent {
 	public void GoTo() {
 		driver.get("https://rahulshettyacademy.com/client/");
 	}
-	public void Login(String Email,String Password) {
+	public ProductCatalouge Login(String Email,String Password) {
 		UserEmail.sendKeys(Email);
 		UserPassword.sendKeys(Password);
 		LoginBtn.click();
+		ProductCatalouge productCatalouge = new ProductCatalouge(driver);
+		return productCatalouge;
 		
 		}
 	
