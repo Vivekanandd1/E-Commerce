@@ -21,7 +21,8 @@ public class ConfirmationPage extends AbstractComponent {
 	@FindBy(xpath = "//h1[normalize-space()='Thankyou for the order.']")
 	WebElement ConfirmText;
 	
-	public String ConfirmationText() {
+	public String ConfirmationText() throws InterruptedException {
+		
 		return ConfirmText.getText();
 		
 		

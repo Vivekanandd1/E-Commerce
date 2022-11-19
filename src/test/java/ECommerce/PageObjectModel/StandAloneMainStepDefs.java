@@ -26,23 +26,13 @@ public class StandAloneMainStepDefs extends BaseTestComponent {
 		String CountryName  = "india";
 		String ActualText = "THANKYOU FOR THE ORDER.";
 	
-	
-		
-		
 		LoginPage loginPage = Launch();
-//		LoginPage loginPage = new LoginPage(driver);
 		ProductCatalouge productCatalouge = loginPage.Login("ec.vivekd92@gmail.com", "Rony@11888");
-	
-		
 		List<WebElement>Productlists = productCatalouge.GetProductList();	
 		productCatalouge.AddProductToCart(Productname);
-//		productCatalouge.GotoCartPage();
 		CartPage  cartPage = productCatalouge.GotoCartPage();
-		Boolean Match = cartPage.VerifyProductDisplay(Productname);
-//		Assert.assertTrue(Match);
-		
+		Boolean Match = cartPage.VerifyProductDisplay(Productname);	
 		CheckOutPage checkoutPage = cartPage.GoToCheckout();
-//		CheckOutPage checkoutPage = new CheckOutPage(driver);
 		checkoutPage.selectCountry(CountryName);
 		checkoutPage.OrderSubmit();
 		ConfirmationPage confirmationPage = new ConfirmationPage(driver);
