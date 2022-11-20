@@ -21,12 +21,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class StandAloneMainStepDefs extends BaseTestComponent {
 	
 	@Test
-	public static void SubmitOrderTest() throws InterruptedException, IOException {
+	public void SubmitOrderTest() throws InterruptedException, IOException {
 		String Productname = "ADIDAS ORIGINAL";
 		String CountryName  = "india";
 		String ActualText = "THANKYOU FOR THE ORDER.";
 	
-		LoginPage loginPage = Launch();
 		ProductCatalouge productCatalouge = loginPage.Login("ec.vivekd92@gmail.com", "Rony@11888");
 		List<WebElement>Productlists = productCatalouge.GetProductList();	
 		productCatalouge.AddProductToCart(Productname);
@@ -38,8 +37,7 @@ public class StandAloneMainStepDefs extends BaseTestComponent {
 		ConfirmationPage confirmationPage = new ConfirmationPage(driver);
 		String Confirmation = confirmationPage.ConfirmationText();		
 		Assert.assertEquals(ActualText, Confirmation);
-		Thread.sleep(1500);
-		driver.quit();
+		
 	}
 
 }

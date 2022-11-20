@@ -10,27 +10,31 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import ECommerce.PageObjectModel.LoginPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTestComponent {
-	public static WebDriver driver;
+	public WebDriver driver;
+	public LoginPage loginPage;
 	
-	public static WebDriver DriverInitialisation() throws IOException {
+	public  WebDriver DriverInitialisation() throws IOException {
 		Properties prop = new Properties();
 		FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\GloabalData.properties");
 		prop.load(fis);
 		String Browsername = prop.getProperty("browser");
 		if (Browsername.equalsIgnoreCase("chrome")) {
-			WebDriverManager.chromedriver().setup();
-			WebDriverManager.chromedriver().setup();
+			WebDriverManager.chromedriver().setup(); 
 			driver = new ChromeDriver();
 		}
 		else if (Browsername.equalsIgnoreCase("edge")) {
+			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		}
        else if (Browsername.equalsIgnoreCase("firefox")) {
+    	   WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		}
 	
@@ -39,11 +43,18 @@ public class BaseTestComponent {
 		return driver;
 	}
 	
-	public static LoginPage Launch() throws IOException {
+	@BeforeMethod
+	public LoginPage Launch() throws IOException {
 		driver = DriverInitialisation();
-		LoginPage loginPage = new LoginPage(driver);
+		loginPage = new LoginPage(driver);
 		 loginPage.GoTo();
 		 return loginPage;
+	}
+	
+	@AfterMethod
+	public void Teardown() throws InterruptedException {
+		Thread.sleep(1500);
+		driver.quit();
 	}
 	
 
